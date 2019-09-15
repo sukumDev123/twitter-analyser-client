@@ -44,7 +44,10 @@ function ListFileShow({ ind, dataClick }) {
         hashTagDis.payload.userTopRetweet.retweet_count = retweets_count
         dispatchHashTag(hashTagDis)
       })
-      .catch(err => console.log({ err }))
+      .catch(err => {
+        console.log({ err })
+        alert(`${err.message}`)
+      })
   }
   return (
     <div>

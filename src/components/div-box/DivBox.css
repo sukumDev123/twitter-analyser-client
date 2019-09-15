@@ -1,0 +1,35 @@
+.div-box {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.div-box > h2 {
+  color: rgb(58, 58, 58);
+}
+.div-box ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+  padding: 0px;
+  background: rgb(243, 243, 243);
+  padding: 40px;
+  border-radius: 6px;
+}
+.div-box li {
+  list-style: none;
+  font-weight: bold;
+  border-bottom: 1px solid;
+  padding-left: 10px;
+  color: rgb(58, 58, 58);
+  padding-bottom: 2px;
+  /* background: red; */
+}
+@media only screen and (max-width: 600px) {
+  .div-box ul {
+    grid-template-columns: 1fr;
+    margin: 0 0 30px;
+  }
+  .div-box {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

@@ -1,0 +1,18 @@
+.box-file-hashtag {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  width: 70%;
+
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.2);
+}
+@media only screen and (max-width: 700px) {
+  .box-file-hashtag {
+    grid-template-columns: 1fr;
+    margin: auto;
+    width: 90%;
+  }
+}

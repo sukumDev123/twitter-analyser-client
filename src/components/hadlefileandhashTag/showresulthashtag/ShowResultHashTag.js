@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import './ShowResultHashTag.css'
-import { HashtagFileHasgTagContext } from '../hadlefileandhashTag/HanleFileAndHashTagProvider'
-import UserRetweets from '../user_retweets/UserRetweets'
-import DivBox from '../div-box/DivBox'
+import { HashtagFileHasgTagContext } from '../HanleFileAndHashTagProvider'
+import UserRetweets from './user_retweets/UserRetweets'
+import DivBox from '../../div-box/DivBox'
 
 function HasgTag() {
   const { hashTag } = useContext(HashtagFileHasgTagContext)
@@ -14,8 +14,16 @@ function HasgTag() {
   )
 }
 export default function ShowResultHashTag() {
+  const { clickShowData } = useContext(HashtagFileHasgTagContext)
+
   return (
-    <div>
+    <div className="showResult">
+      {clickShowData !== '' ? (
+        <h1 className="titleShowResult">Hasgtag: {clickShowData}</h1>
+      ) : (
+        ''
+      )}
+
       <HasgTag></HasgTag>
       <UserRetweets></UserRetweets>
     </div>

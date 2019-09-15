@@ -1,8 +1,9 @@
 .box-file-hashtag {
+  position: fixed;
   display: grid;
   grid-template-columns: 15% 85%;
-  width: 70%;
-
+  width: 100%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   background: white;
@@ -12,7 +13,5 @@
 @media only screen and (max-width: 700px) {
   .box-file-hashtag {
     grid-template-columns: 1fr;
-    margin: auto;
-    width: 90%;
   }
 }

@@ -1,0 +1,43 @@
+.list-of-file-box {
+  padding: 20px;
+
+  background: #f76262;
+  color: white;
+}
+.list-of-file-in {
+  max-width: 300px;
+  overflow: auto;
+  background: #fa7272;
+  border-radius: 6px;
+  margin-top: 2vh;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  padding-bottom: 20px;
+}
+.list-of-hashtag-title {
+  font-size: 25px;
+  margin: 0;
+}
+.strong_style {
+  transition: all 0.4s ease-in;
+  cursor: pointer;
+}
+.list-of-file-in > div {
+  transition: all 0.4s ease-in;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid;
+  padding: 5px;
+}
+.list-of-file-in > div:hover {
+  border-bottom: 2px solid;
+  padding-bottom: 15px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .list-of-file-box {
+    border: 0;
+  }
+}

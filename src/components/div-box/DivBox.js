@@ -1,7 +1,7 @@
 import React from 'react'
 import './DivBox.css'
 
-export default function DivBox({ datas, children, text }) {
+export default function DivBox({ datas, text }) {
   return (
     <div className="div-box">
       <h2>{text}</h2>

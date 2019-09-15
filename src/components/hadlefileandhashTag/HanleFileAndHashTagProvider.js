@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useState } from 'react'
 
 export const HashtagFileHasgTagContext = createContext()
 const hashTagResult = {
@@ -61,12 +61,12 @@ function hashTagReducer(state = hashTagResult, action) {
 }
 
 export default function HadleFileAndHashTagProvider({ children }) {
-  const [hashTag, dispatchHashTag] = useReducer(hashTagReducer, {
-    features: [],
-    idf: []
-  })
+  const [hashTag, dispatchHashTag] = useReducer(hashTagReducer, hashTagResult)
+  const [clickShowData, setClickShowData] = useState('')
   return (
-    <HashtagFileHasgTagContext.Provider value={{ hashTag, dispatchHashTag }}>
+    <HashtagFileHasgTagContext.Provider
+      value={{ hashTag, dispatchHashTag, clickShowData, setClickShowData }}
+    >
       {children}
     </HashtagFileHasgTagContext.Provider>
   )

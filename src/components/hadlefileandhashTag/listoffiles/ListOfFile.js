@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './ListOfFile.css'
-import { fetchData } from '../../service/connect-toserver'
-import { db_read_namefiles } from '../../firebase/db'
+import { fetchData } from '../../../service/connect-toserver'
+import { db_read_namefiles } from '../../../firebase/db'
 import {
   HashtagFileHasgTagContext,
   HASHTAGADD
-} from '../hadlefileandhashTag/HanleFileAndHashTagProvider'
+} from '../HanleFileAndHashTagProvider'
 
 const setDataBaseF = setListFile => {
   const handleDb = snap => {
@@ -19,12 +19,15 @@ const setDataBaseF = setListFile => {
 
 function ListFileShow({ ind, dataClick }) {
   const cut_onlyWord = dataClick.split('.')[0]
-  const { dispatchHashTag } = useContext(HashtagFileHasgTagContext)
+  const { dispatchHashTag, setClickShowData } = useContext(
+    HashtagFileHasgTagContext
+  )
 
   const whenUserClick = e => {
     const nameFile = JSON.stringify({
       name_file: dataClick
     })
+    setClickShowData(cut_onlyWord)
     fetchData(nameFile)
       .then(data => {
         const features = data.data.features
@@ -41,9 +44,11 @@ function ListFileShow({ ind, dataClick }) {
       .catch(err => console.log({ err }))
   }
   return (
-    <h3 className={ind} onClick={whenUserClick}>
-      {cut_onlyWord}
-    </h3>
+    <div>
+      <strong className={ind + ' strong_style'} onClick={whenUserClick}>
+        {cut_onlyWord}
+      </strong>
+    </div>
   )
 }
 
@@ -56,6 +61,7 @@ export default function ListOfFile() {
   }, [0])
   return (
     <div className="list-of-file-box">
+      <h3 className="list-of-hashtag-title">List of hashtags</h3>
       <div className="list-of-file-in">
         {listFile.length > 0
           ? listFile.map((data, ind) => (

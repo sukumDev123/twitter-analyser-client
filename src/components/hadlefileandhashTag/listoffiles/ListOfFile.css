@@ -1,6 +1,6 @@
 .list-of-file-box {
   padding: 20px;
-
+  box-shadow: 2px 0 8px 1px rgba(0, 0, 0, 0.2);
   background: #f76262;
   color: white;
 }

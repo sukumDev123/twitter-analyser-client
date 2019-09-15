@@ -6,12 +6,15 @@ import {
   HashtagFileHasgTagContext,
   HASHTAGADD
 } from '../HanleFileAndHashTagProvider'
+import { AppContext } from '../../../AppProvider'
+import { LoderContext } from '../../loading/LoaderProvider'
 
-const setDataBaseF = setListFile => {
+const setDataBaseF = (setListFile, setShowLoader) => {
   const handleDb = snap => {
     if (snap) {
       const toArray = Object.values(snap.val())
       setListFile(toArray)
+      setShowLoader(false)
     }
   }
   db_read_namefiles().on('value', handleDb)
@@ -55,10 +58,12 @@ function ListFileShow({ ind, dataClick }) {
 export default function ListOfFile() {
   const [listFile, setListFile] = useState([])
   const [cssStyle, setCssStyle] = useState(Array(listFile.length).fill('none'))
+  const { setShowAddNewHashTag } = useContext(AppContext)
+  const { setShowLoader } = useContext(LoderContext)
 
   useEffect(() => {
-    setDataBaseF(setListFile)
-  }, [0])
+    setDataBaseF(setListFile, setShowLoader)
+  }, [])
   return (
     <div className="list-of-file-box">
       <h3 className="list-of-hashtag-title">List of hashtags</h3>
@@ -73,6 +78,7 @@ export default function ListOfFile() {
             ))
           : ''}
       </div>
+      <h5 onClick={e => setShowAddNewHashTag(true)}>add new hashtag.</h5>
     </div>
   )
 }

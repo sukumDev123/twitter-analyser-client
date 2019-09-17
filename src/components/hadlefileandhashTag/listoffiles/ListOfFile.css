@@ -5,7 +5,7 @@
   color: white;
 }
 .list-of-file-in {
-  max-width: 300px;
+  max-height: 50vh;
   overflow: auto;
   background: #fa7272;
   border-radius: 6px;
@@ -23,6 +23,7 @@
   transition: all 0.4s ease-in;
   cursor: pointer;
 }
+
 .list-of-file-in > div {
   transition: all 0.4s ease-in;
   margin-top: 10px;

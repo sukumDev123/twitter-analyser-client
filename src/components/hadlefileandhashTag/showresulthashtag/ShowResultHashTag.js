@@ -3,6 +3,7 @@ import './ShowResultHashTag.css'
 import { HashtagFileHasgTagContext } from '../HanleFileAndHashTagProvider'
 import UserRetweets from './user_retweets/UserRetweets'
 import DivBox from '../../div-box/DivBox'
+import ChartSentiment from './chartsentiment/ChartSentiment'
 
 function HasgTag() {
   const { hashTag } = useContext(HashtagFileHasgTagContext)
@@ -14,7 +15,7 @@ function HasgTag() {
   )
 }
 export default function ShowResultHashTag() {
-  const { clickShowData } = useContext(HashtagFileHasgTagContext)
+  const { clickShowData, hashTag } = useContext(HashtagFileHasgTagContext)
 
   return (
     <div className="showResult">
@@ -23,9 +24,17 @@ export default function ShowResultHashTag() {
       ) : (
         ''
       )}
-
-      <HasgTag></HasgTag>
-      <UserRetweets></UserRetweets>
+      {hashTag.text_sentiments.good.length ? (
+        <ChartSentiment></ChartSentiment>
+      ) : (
+        'ChartSentiment Null'
+      )}
+      {hashTag.features.length ? <HasgTag></HasgTag> : ''}
+      {hashTag.userTopRetweet.userName.length ? (
+        <UserRetweets> </UserRetweets>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

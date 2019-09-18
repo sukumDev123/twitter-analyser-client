@@ -4,7 +4,8 @@ import { fetchData } from '../../../service/connect-toserver'
 import { db_read_namefiles } from '../../../firebase/db'
 import {
   HashtagFileHasgTagContext,
-  HASHTAGADD
+  HASHTAGADD,
+  HASHTAGREMOVE
 } from '../HanleFileAndHashTagProvider'
 import { AppContext } from '../../../AppProvider'
 import { LoderContext } from '../../loading/LoaderProvider'
@@ -25,8 +26,11 @@ function ListFileShow({ ind, dataClick }) {
   const { dispatchHashTag, setClickShowData } = useContext(
     HashtagFileHasgTagContext
   )
+  const { setShowLoader } = useContext(LoderContext)
 
   const whenUserClick = e => {
+    setShowLoader(true)
+    dispatchHashTag(HASHTAGREMOVE)
     const nameFile = JSON.stringify({
       name_file: dataClick
     })
@@ -35,18 +39,30 @@ function ListFileShow({ ind, dataClick }) {
       .then(data => {
         const features = data.data.features
         const idfs = data.data.idf
+        const word_predict = data.data.word_predict
         const userName = data.data.userTopRetweet.userName
         const retweets_count = data.data.userTopRetweet.retweets_count
+        const gooComment = data.data.text_sentiments.good
+        const negCommant = data.data.text_sentiments.neg
+        const neutralCommant = data.data.text_sentiments.neutral
         const hashTagDis = HASHTAGADD
         hashTagDis.payload.features = features
         hashTagDis.payload.idf = idfs
         hashTagDis.payload.userTopRetweet.userName = userName
         hashTagDis.payload.userTopRetweet.retweet_count = retweets_count
+        hashTagDis.payload.word_predict = word_predict
+        hashTagDis.payload.text_sentiments = {
+          good: gooComment,
+          neg: negCommant,
+          neutral: neutralCommant
+        }
         dispatchHashTag(hashTagDis)
+        setShowLoader(false)
       })
       .catch(err => {
         console.log({ err })
         alert(`${err.message}`)
+        setShowLoader(false)
       })
   }
   return (

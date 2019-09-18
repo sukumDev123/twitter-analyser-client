@@ -1,0 +1,115 @@
+.chart-box {
+  width: 100%;
+  padding: 30px;
+
+  border-radius: 6px;
+  background: rgb(243, 243, 243);
+}
+
+.chart-bar {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  margin-bottom: 20px;
+  padding: 0;
+}
+.chart-bar > div {
+  transition: all 0.4s ease-in;
+  align-self: center;
+  border-radius: 6px;
+  height: 30px;
+  position: relative;
+}
+.chart-bar > div > h5 {
+  text-align: center;
+  color: white;
+  background: black;
+  border-radius: 6px;
+  padding: 0 10px 0 10px;
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* text-align: start; */
+}
+.chart-bar > h5 {
+  text-align: right;
+}
+.chartName1 {
+  background: green;
+}
+.chartName-1 {
+  background: red;
+
+  /* height: 100px; */
+}
+
+.chartName0 {
+  background: rgb(255, 238, 0);
+}
+.chart_and_texts {
+  display: flex;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.chart_and_texts > div:last-child {
+  padding: 10px;
+  max-height: 300px;
+  overflow: auto;
+  padding-left: 20px;
+}
+.chart_and_texts > div:last-child > div:first-child {
+  margin-top: -30px;
+}
+/* .normalDIv h4 {
+  margin-top: 10px;
+} */
+.title-chart {
+  margin-left: 50px;
+}
+.good-comment > h4 {
+  background: green;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
+.neg-comment > h4 {
+  background: red;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+}
+.neutral-comment > h4 {
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  background: rgb(255, 238, 0);
+}
+.overSentimentStyles {
+  padding: 20px;
+}
+.overSentimentStyles > p {
+  border-bottom: 1px solid;
+  padding: 10px;
+  margin-top: -20px;
+}
+
+@media only screen and (max-width: 900px) {
+  .chart_and_texts {
+    display: block;
+    width: 90%;
+    margin: auto;
+  }
+  .title-chart {
+    margin-left: 20px;
+  }
+  .chart-box {
+    padding: 0px;
+    margin-bottom: 0px;
+  }
+  .chart-bar {
+    grid-template-columns: 80% 20%;
+  }
+  .chart-bar > h5 {
+    text-align: center;
+  }
+}

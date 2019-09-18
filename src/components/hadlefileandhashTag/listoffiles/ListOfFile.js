@@ -76,7 +76,7 @@ function ListFileShow({ ind, dataClick }) {
 
 export default function ListOfFile() {
   const [listFile, setListFile] = useState([])
-  const [cssStyle, setCssStyle] = useState(Array(listFile.length).fill('none'))
+  // const [cssStyle, setCssStyle] = useState(Array(listFile.length).fill('none'))
   const { setShowAddNewHashTag } = useContext(AppContext)
   const { setShowLoader } = useContext(LoderContext)
 
@@ -89,11 +89,8 @@ export default function ListOfFile() {
       <div className="list-of-file-in">
         {listFile.length > 0
           ? listFile.map((data, ind) => (
-              <ListFileShow
-                className={cssStyle[ind]}
-                dataClick={data}
-                key={ind}
-              ></ListFileShow>
+              // className={cssStyle[ind]}
+              <ListFileShow dataClick={data} key={ind}></ListFileShow>
             ))
           : ''}
       </div>

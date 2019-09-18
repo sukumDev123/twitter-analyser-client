@@ -27,7 +27,7 @@ export default function ShowResultHashTag() {
       {hashTag.text_sentiments.good.length ? (
         <ChartSentiment></ChartSentiment>
       ) : (
-        'ChartSentiment Null'
+        ''
       )}
       {hashTag.features.length ? <HasgTag></HasgTag> : ''}
       {hashTag.userTopRetweet.userName.length ? (

@@ -26,7 +26,7 @@ function ShowUiOfGrop({ grop, gropis, nameUserTopTen }) {
   return followers ? (
     <div className="grop-div">
       <div className="grop-box-parant">
-        <h3>{`Grop : ${gropis}`}</h3>
+        <h3>{`Group : ${gropis}`}</h3>
         <div className="handle-textofretweet-and-follower">
           <h5>
             Follower: {followersMinMaxToInt.min} -> {followersMinMaxToInt.max}{' '}
@@ -64,7 +64,7 @@ export default function ClusteringUser() {
   const { show_user_grop } = clustering_grop
   return (
     <div className="cluster-div">
-      <h2>Clustering Top 10 User Grop In This HashTag</h2>
+      <h2>Clustering Top 10 User Group In This HashTag</h2>
       <div className="cluster-box">
         <div className="cluster-min-max-grop">
           <ShowUiOfGrop

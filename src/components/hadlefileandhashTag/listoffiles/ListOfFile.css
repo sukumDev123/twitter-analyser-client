@@ -1,5 +1,5 @@
 .list-of-file-box {
-  padding: 20px;
+  /* padding: 20px; */
   box-shadow: 2px 0 8px 1px rgba(0, 0, 0, 0.2);
   background: #f76262;
   color: white;
@@ -18,6 +18,8 @@
 .list-of-hashtag-title {
   font-size: 25px;
   margin: 0;
+  padding: 20px;
+  text-align: center;
 }
 .strong_style {
   transition: all 0.3s ease-in;
@@ -33,26 +35,29 @@
 }
 .list-of-file-in > div:hover {
   border-bottom: 2px solid;
-  padding-bottom: 15px;
+  margin-left: 0px;
+
   font-weight: bold;
 }
 .clicked {
-  background: white;
-  color: black;
+  background: rgb(255, 67, 67);
+  border-radius: 3px;
+
+  color: whitesmoke;
   margin-left: 0;
 }
 .none {
-  margin-left: 20px;
-  margin-right: 20px;
-
-  position: relative;
+  margin-left: 30px;
 }
 .none > strong {
   /* font-size: 100%; */
 
   display: inline-block;
 }
-
+.none,
+.clicked {
+  cursor: pointer;
+}
 @media only screen and (max-width: 600px) {
   .list-of-file-box {
     border: 0;

@@ -89,10 +89,8 @@ function ListFileShow({
       })
   }
   return (
-    <div className={cssStyle[ind]}>
-      <strong className={'strong_style'} onClick={e => whenUserClick(ind)}>
-        {cut_onlyWord}
-      </strong>
+    <div className={cssStyle[ind]} onClick={e => whenUserClick(ind)}>
+      <strong className={'strong_style'}>{cut_onlyWord}</strong>
     </div>
   )
 }

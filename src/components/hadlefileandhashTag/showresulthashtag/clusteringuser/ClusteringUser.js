@@ -5,24 +5,19 @@ import { money_format } from '../../../../presenters/money_format'
 function ShowUiOfGrop({ grop, gropis, nameUserTopTen }) {
   const followers = grop.follower
   const retweets = grop.retweet
-  const followersMinMaxToInt = followers
-    ? {
-        min: money_format(parseFloat(followers.min)),
-        max: money_format(parseFloat(followers.max))
-      }
-    : {
-        min: 0,
-        max: 0
-      }
-  const retweetsMinMaxToInt = retweets
-    ? {
-        min: money_format(parseFloat(retweets.min)),
-        max: money_format(parseFloat(retweets.max))
-      }
-    : {
-        min: 0,
-        max: 0
-      }
+  const handleMinMax = datasMinMax =>
+    datasMinMax
+      ? {
+          min: money_format(parseFloat(datasMinMax.min)),
+          max: money_format(parseFloat(datasMinMax.max))
+        }
+      : {
+          min: 0,
+          max: 0
+        }
+
+  const followersMinMaxToInt = handleMinMax(followers)
+  const retweetsMinMaxToInt = handleMinMax(retweets)
   return followers ? (
     <div className="grop-div">
       <div className="grop-box-parant">
@@ -52,7 +47,6 @@ function ShowUserNameTopTenEachOfGrop({ gropData }) {
         {gropData.map((data, ind) => (
           <h5 key={ind}>@{data}</h5>
         ))}
-        {/* <h5>Min: {followersMinMaxToInt.min}</h5> */}
       </div>
     </div>
   )

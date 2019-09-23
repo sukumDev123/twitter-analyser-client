@@ -35,17 +35,6 @@ const handleDataFromDataBase = data => {
   }
 }
 
-const setDataBaseF = (setListFile, setShowLoader) => {
-  const handleDb = snap => {
-    if (snap) {
-      const toArray = Object.values(snap.val())
-      setListFile(toArray)
-      setShowLoader(false)
-    }
-  }
-  db_read_namefiles().on('value', handleDb)
-}
-
 function ListFileShow({
   ind,
   dataClick,
@@ -105,7 +94,18 @@ export default function ListOfFile() {
 
   const { setShowLoader } = useContext(LoderContext)
   const sizeOfList = listFile.length
+
   useEffect(() => {
+    const setDataBaseF = (setListFile = () => {}, setShowLoader = () => {}) => {
+      const handleDb = snap => {
+        if (snap) {
+          const toArray = Object.values(snap.val())
+          setListFile(toArray)
+          setShowLoader(false)
+        }
+      }
+      db_read_namefiles().on('value', handleDb)
+    }
     setDataBaseF(setListFile, setShowLoader)
   }, [])
   useEffect(() => {

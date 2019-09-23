@@ -10,6 +10,31 @@ import {
 
 import { LoderContext } from '../../loading/LoaderProvider'
 
+const handleDataFromDataBase = data => {
+  const features = data.data.features
+  const idfs = data.data.idf
+  const word_predict = data.data.word_predict
+  const userName = data.data.userTopRetweet.userName
+  const retweets_count = data.data.userTopRetweet.retweets_count
+  const goodComment = data.data.text_sentiments.good
+  const negCommant = data.data.text_sentiments.neg
+  const neutralCommant = data.data.text_sentiments.neutral
+  const grop_detail = data.data.clustering_grop.grop_detail
+  const show_user_grop = data.data.clustering_grop.show_user_grop
+  return {
+    features,
+    idfs,
+    userTopRetweet: { userName, retweets_count },
+    word_predict,
+    text_sentiments: {
+      good: goodComment,
+      neg: negCommant,
+      neutral: neutralCommant
+    },
+    clustering_grop: { grop_detail, show_user_grop }
+  }
+}
+
 const setDataBaseF = (setListFile, setShowLoader) => {
   const handleDb = snap => {
     if (snap) {
@@ -35,8 +60,7 @@ function ListFileShow({
   )
   const { setShowLoader } = useContext(LoderContext)
 
-  const whenUserClick = ind => {
-    console.log({ predClicked })
+  const whenUserClick = async ind => {
     if (predClicked !== '') {
       cssStyle[predClicked] = 'none'
       cssStyle[ind] = 'clicked'
@@ -47,46 +71,25 @@ function ListFileShow({
     }
 
     setCssStyle(cssStyle)
-
     setShowLoader(true)
     dispatchHashTag(HASHTAGREMOVE)
     const nameFile = JSON.stringify({
       name_file: dataClick
     })
+
     setClickShowData(cut_onlyWord)
-    fetchData(nameFile)
-      .then(data => {
-        const features = data.data.features
-        const idfs = data.data.idf
-        const word_predict = data.data.word_predict
-        const userName = data.data.userTopRetweet.userName
-        const retweets_count = data.data.userTopRetweet.retweets_count
-        const gooComment = data.data.text_sentiments.good
-        const negCommant = data.data.text_sentiments.neg
-        const neutralCommant = data.data.text_sentiments.neutral
-        const grop_detail = data.data.clustering_grop.grop_detail
-        const show_user_grop = data.data.clustering_grop.show_user_grop
-        const hashTagDis = HASHTAGADD
-        hashTagDis.payload.features = features
-        hashTagDis.payload.idf = idfs
-        hashTagDis.payload.userTopRetweet.userName = userName
-        hashTagDis.payload.userTopRetweet.retweet_count = retweets_count
-        hashTagDis.payload.word_predict = word_predict
-        hashTagDis.payload.text_sentiments = {
-          good: gooComment,
-          neg: negCommant,
-          neutral: neutralCommant
-        }
-        hashTagDis.payload.clustering_grop.grop_detail = grop_detail
-        hashTagDis.payload.clustering_grop.show_user_grop = show_user_grop
-        dispatchHashTag(hashTagDis)
-        setShowLoader(false)
-      })
-      .catch(err => {
-        console.log({ err })
-        alert(`${err.message}`)
-        setShowLoader(false)
-      })
+
+    try {
+      const data = await fetchData(nameFile)
+      const hashTagDis = HASHTAGADD
+      hashTagDis.payload = handleDataFromDataBase(data)
+      dispatchHashTag(hashTagDis)
+      setShowLoader(false)
+    } catch (err) {
+      console.log({ err })
+      alert(`${err.message}`)
+      setShowLoader(false)
+    }
   }
   return (
     <div className={cssStyle[ind]} onClick={e => whenUserClick(ind)}>

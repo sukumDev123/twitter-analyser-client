@@ -1,0 +1,71 @@
+.cluster-div {
+  /* padding: 10px; */
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 6px;
+
+  overflow: auto;
+}
+.cluster-box {
+  display: flex;
+  justify-content: space-around;
+}
+.cluster-min-max-grop {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
+  /* background: yellow; */
+}
+.cluster-grop-name-user {
+  width: 100%;
+  padding: 10px;
+  /* background: beige; */
+}
+.grop-box {
+  margin: 0;
+  padding: 0;
+}
+.grop-box {
+  display: grid;
+  grid-gap: 0.5em;
+  border-radius: 6px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grop-box > h5 {
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  transition: all 0.3s ease-in;
+  margin: 0 10px 0 10px;
+  border: 1px solid black;
+}
+.grop-box > h5:hover {
+  background: white;
+  border-radius: 6px;
+}
+.grop-div {
+  background: white;
+  padding: 10px;
+
+  border-radius: 3px;
+  transition: all 0.6s ease-in-out;
+}
+.grop-div:hover {
+  box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  background: rgb(253, 237, 92);
+}
+.handle-textofretweet-and-follower {
+  display: flex;
+}
+.handle-textofretweet-and-follower > h5 {
+  width: 100%;
+}
+@media only screen and (max-width: 600px) {
+  .cluster-min-max-grop {
+    grid-template-columns: 1fr;
+  }
+}

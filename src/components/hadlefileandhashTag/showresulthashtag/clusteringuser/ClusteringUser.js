@@ -50,7 +50,7 @@ function ShowUserNameTopTenEachOfGrop({ gropData }) {
     <div className="grop-div-inside">
       <div className="grop-box">
         {gropData.map((data, ind) => (
-          <h5 key={ind}>{data}</h5>
+          <h5 key={ind}>@{data}</h5>
         ))}
         {/* <h5>Min: {followersMinMaxToInt.min}</h5> */}
       </div>

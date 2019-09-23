@@ -7,7 +7,7 @@ import {
   HASHTAGADD,
   HASHTAGREMOVE
 } from '../HanleFileAndHashTagProvider'
-import { AppContext } from '../../../AppProvider'
+
 import { LoderContext } from '../../loading/LoaderProvider'
 
 const setDataBaseF = (setListFile, setShowLoader) => {
@@ -21,14 +21,33 @@ const setDataBaseF = (setListFile, setShowLoader) => {
   db_read_namefiles().on('value', handleDb)
 }
 
-function ListFileShow({ ind, dataClick }) {
+function ListFileShow({
+  ind,
+  dataClick,
+  setCssStyle,
+  cssStyle,
+  predClicked,
+  setPredClicked
+}) {
   const cut_onlyWord = dataClick.split('.')[0]
   const { dispatchHashTag, setClickShowData } = useContext(
     HashtagFileHasgTagContext
   )
   const { setShowLoader } = useContext(LoderContext)
 
-  const whenUserClick = e => {
+  const whenUserClick = ind => {
+    console.log({ predClicked })
+    if (predClicked !== '') {
+      cssStyle[predClicked] = 'none'
+      cssStyle[ind] = 'clicked'
+      setPredClicked(ind)
+    } else {
+      cssStyle[ind] = 'clicked'
+      setPredClicked(ind)
+    }
+
+    setCssStyle(cssStyle)
+
     setShowLoader(true)
     dispatchHashTag(HASHTAGREMOVE)
     const nameFile = JSON.stringify({
@@ -70,8 +89,8 @@ function ListFileShow({ ind, dataClick }) {
       })
   }
   return (
-    <div>
-      <strong className={ind + ' strong_style'} onClick={whenUserClick}>
+    <div className={cssStyle[ind]}>
+      <strong className={'strong_style'} onClick={e => whenUserClick(ind)}>
         {cut_onlyWord}
       </strong>
     </div>
@@ -80,25 +99,36 @@ function ListFileShow({ ind, dataClick }) {
 
 export default function ListOfFile() {
   const [listFile, setListFile] = useState([])
-  // const [cssStyle, setCssStyle] = useState(Array(listFile.length).fill('none'))
-  const { setShowAddNewHashTag } = useContext(AppContext)
-  const { setShowLoader } = useContext(LoderContext)
+  const [cssStyle, setCssStyle] = useState([])
+  const [predClicked, setPredClicked] = useState('')
 
+  const { setShowLoader } = useContext(LoderContext)
+  const sizeOfList = listFile.length
   useEffect(() => {
     setDataBaseF(setListFile, setShowLoader)
   }, [])
+  useEffect(() => {
+    setCssStyle(Array(listFile.length).fill('none'))
+  }, [listFile.length])
   return (
     <div className="list-of-file-box">
       <h3 className="list-of-hashtag-title">List of hashtags</h3>
       <div className="list-of-file-in">
-        {listFile.length > 0
+        {sizeOfList > 0
           ? listFile.map((data, ind) => (
-              // className={cssStyle[ind]}
-              <ListFileShow dataClick={data} key={ind}></ListFileShow>
+              <ListFileShow
+                setCssStyle={setCssStyle}
+                cssStyle={cssStyle}
+                dataClick={data}
+                key={ind}
+                ind={ind}
+                predClicked={predClicked}
+                setPredClicked={setPredClicked}
+              ></ListFileShow>
             ))
           : ''}
       </div>
-      <h5 onClick={e => setShowAddNewHashTag(true)}>add new hashtag.</h5>
+      {/* <h5 onClick={e => setShowAddNewHashTag(true)}>add new hashtag.</h5> */}
     </div>
   )
 }

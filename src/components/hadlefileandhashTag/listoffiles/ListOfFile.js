@@ -45,6 +45,8 @@ function ListFileShow({ ind, dataClick }) {
         const gooComment = data.data.text_sentiments.good
         const negCommant = data.data.text_sentiments.neg
         const neutralCommant = data.data.text_sentiments.neutral
+        const grop_detail = data.data.clustering_grop.grop_detail
+        const show_user_grop = data.data.clustering_grop.show_user_grop
         const hashTagDis = HASHTAGADD
         hashTagDis.payload.features = features
         hashTagDis.payload.idf = idfs
@@ -56,6 +58,8 @@ function ListFileShow({ ind, dataClick }) {
           neg: negCommant,
           neutral: neutralCommant
         }
+        hashTagDis.payload.clustering_grop.grop_detail = grop_detail
+        hashTagDis.payload.clustering_grop.show_user_grop = show_user_grop
         dispatchHashTag(hashTagDis)
         setShowLoader(false)
       })

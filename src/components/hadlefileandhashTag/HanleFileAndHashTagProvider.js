@@ -9,7 +9,15 @@ const hashTagResult = {
     retweet_count: []
   },
   word_predict: { type: [], size: [] },
-  text_sentiments: { good: [], neg: [], neutral: [] }
+  text_sentiments: { good: [], neg: [], neutral: [] },
+  clustering_grop: {
+    grop_detail: {
+      grop1: { retweet: [], follower: [] },
+      grop2: { retweet: [], follower: [] },
+      grop3: { retweet: [], follower: [] }
+    },
+    show_user_grop: { grop1: [], grop2: [], grop3: [] }
+  }
 }
 export const HASHTAGADD = {
   type: 'HASHTAGADD',
@@ -33,22 +41,21 @@ function hashTagReducer(state = hashTagResult, action) {
             .length
         }
       })
-      console.log({ typePredict, sizeOfPredict })
       return {
         features: action.payload.features,
         idf: action.payload.idf,
         userTopRetweet: {
-          userName: action.payload.userTopRetweet.userName,
-          retweet_count: action.payload.userTopRetweet.retweet_count
+          ...action.payload.userTopRetweet
         },
         word_predict: {
           type: typePredict,
           size: sizeOfPredict
         },
         text_sentiments: {
-          good: action.payload.text_sentiments.good,
-          neg: action.payload.text_sentiments.neg,
-          neutral: action.payload.text_sentiments.neutral
+          ...action.payload.text_sentiments
+        },
+        clustering_grop: {
+          ...action.payload.clustering_grop
         }
       }
     }
@@ -61,7 +68,15 @@ function hashTagReducer(state = hashTagResult, action) {
           retweet_count: []
         },
         word_predict: [{ type: [], size: [] }],
-        text_sentiments: { good: [], neg: [], neutral: [] }
+        text_sentiments: { good: [], neg: [], neutral: [] },
+        clustering_grop: {
+          grop_detail: {
+            grop1: [],
+            grop2: [],
+            grop3: []
+          },
+          show_user_grop: { grop1: [], grop2: [], grop3: [] }
+        }
       }
     }
     default: {

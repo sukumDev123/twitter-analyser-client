@@ -4,6 +4,7 @@ import { HashtagFileHasgTagContext } from '../HanleFileAndHashTagProvider'
 import UserRetweets from './user_retweets/UserRetweets'
 import DivBox from '../../div-box/DivBox'
 import ChartSentiment from './chartsentiment/ChartSentiment'
+import ClusteringUser from './clusteringuser/ClusteringUser'
 
 function HasgTag() {
   const { hashTag } = useContext(HashtagFileHasgTagContext)
@@ -24,14 +25,19 @@ export default function ShowResultHashTag() {
       ) : (
         ''
       )}
+      {/* Clustering of user show */}
+      <ClusteringUser></ClusteringUser>
+      {/* chart */}
       {hashTag.text_sentiments.good.length ? (
         <ChartSentiment></ChartSentiment>
       ) : (
         ''
       )}
+      {/* hashtag */}
       {hashTag.features.length ? <HasgTag></HasgTag> : ''}
+      {/* retweet user */}
       {hashTag.userTopRetweet.userName.length ? (
-        <UserRetweets> </UserRetweets>
+        <UserRetweets></UserRetweets>
       ) : (
         ''
       )}
